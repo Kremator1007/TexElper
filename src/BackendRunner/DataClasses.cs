@@ -2,23 +2,29 @@ using System.Collections.Generic;
 
 class Problem
 {
-    private string text;
-    private System.IO.FileInfo fileOfTheProblem;
+    public readonly string text;
+    public readonly System.IO.FileInfo fileOfTheProblem;
 }
 
 class FileWithProblems
 {
     public FileWithProblems(System.IO.FileInfo file) { }
-    private List<Problem> problems;
+    public List<Problem> problems;
 }
 
 class SimilarProblemsCase
 {
-    Problem fst, snd;
+    public SimilarProblemsCase(Problem fst, Problem snd) =>
+        (this.fst, this.snd) = (fst, snd);
+
+    public readonly Problem fst, snd;
 }
 
 class ResultData
 {
-    public readonly List<SimilarProblemsCase> similarProblemCases;
+    public ResultData(List<SimilarProblemsCase> similarProblemsCases) =>
+        this.similarProblemsCases = similarProblemsCases;
+
+    public readonly List<SimilarProblemsCase> similarProblemsCases;
 }
 
