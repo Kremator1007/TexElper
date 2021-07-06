@@ -10,8 +10,9 @@ class ProgramToFindDuplicates
         printer.Display(resultData);
     }
     private IOHandler ioHandler;
-  private BackendRunner backendRunner;
-   private PrettyPrinter printer;
+    private BackendRunner backendRunner;
+    private PrettyPrinter printer;
+
 }
 
 class MainClass

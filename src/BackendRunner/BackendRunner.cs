@@ -1,6 +1,6 @@
-class ResultData
-{
-}
+using System.Collections.Generic;
+
+
 
 abstract class BackendRunner
 {
