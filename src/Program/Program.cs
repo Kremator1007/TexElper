@@ -1,12 +1,25 @@
 ﻿using System;
 
-namespace TexElper
+class ProgramToFindDuplicates
 {
-    class Program
+    public ProgramToFindDuplicates() { }
+    public void RunProgram()
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        var inputData = ioHandler.readInputForFindingSimilarProblems();
+        var resultData = backendRunner.processInput(inputData);
+        printer.Display(resultData);
+    }
+    private IOHandler ioHandler;
+    private BackendRunner backendRunner;
+    private PrettyPrinter printer;
+}
+
+class MainClass
+{
+    public static void Main()
+    {
+        var program = new ProgramToFindDuplicates();
+        program.RunProgram();
     }
 }
+
