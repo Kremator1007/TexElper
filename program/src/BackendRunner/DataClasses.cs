@@ -8,7 +8,8 @@ class Problem
 
 class FileWithProblems
 {
-    public FileWithProblems(System.IO.FileInfo file) { }
+    public FileWithProblems(System.IO.FileInfo file) =>
+        problems = FileProcessor.ReadFile(file);
     public List<Problem> problems;
 }
 
