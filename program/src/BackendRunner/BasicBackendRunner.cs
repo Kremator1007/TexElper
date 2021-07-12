@@ -7,7 +7,7 @@ class BasicBackendRunner : BackendRunner
     public override ResultData processInput(InputData inputData)
     {
         var filesWithProblems = inputData.allRelevantFiles.Select(
-            fileInfo => new FileWithProblems(fileInfo)
+            fileInfo => new FileWithProblems(FileProcessor.ReadFile(fileInfo))
         );
         return pairwiseCompareFiles(filesWithProblems);
     }
@@ -17,7 +17,7 @@ class BasicBackendRunner : BackendRunner
         var similarities = files.Pairwise()
                              .SelectMany(pairOfFiles => compareTwoFiles(pairOfFiles.Item1, pairOfFiles.Item2))
                              .ToList();
-        return new ResultData(similarities);
+        return new ResultData(similarProblemsCases: similarities);
     }
 
     private List<SimilarProblemsCase> compareTwoFiles(FileWithProblems fst, FileWithProblems snd) =>
