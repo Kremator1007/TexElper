@@ -1,0 +1,96 @@
+%this is latex 2e
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[mathscr]{eucal}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{fancyhdr}
+% \usepackage{wrapfig}
+% \RequirePackage[pdftex]{graphicx}
+
+\usepackage{pgf,tikz,pgfplots}
+\pgfplotsset{compat=1.9}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+
+% \usepackage{amsthm}
+
+% \oddsidemargin=-10mm
+% \textwidth=180mm
+% \headheight=0pt
+% \headsep=0pt
+% \topmargin=-10mm
+% \textheight=260mm
+
+\sloppy
+\righthyphenmin=2
+\exhyphenpenalty=10000
+
+\pagestyle{empty}
+
+\def\ds{\displaystyle}
+\def\ss{\scriptstyle}
+
+\def\q#1.{{\bf #1.}}
+\def\N{\mathbb N}
+\def\Z{\mathbb Z}
+\def\Q{\mathbb Q}
+\def\R{\mathbb R}
+\def\Pp{\mathbb P}
+\def\C{{\mathbb C}}
+\def\F{{\mathbb F}}
+\def\eps{{\varepsilon}}
+\def\vec{\overrightarrow}
+\def\ov{\overline}
+\def\mmax{\mathop{\rm max}\limits}
+\newcommand{\Char}{{\rm char}}
+\def\sleg#1#2{\left(\frac{#1}{#2}\right)}
+\def\ord{\rm ord}
+\def\arc#1{\buildrel\,\,\smile\over{#1}}
+\DeclareRobustCommand{\No}{\ifmmode{\nfss@text{\textnumero}}\else\textnumero\fi}
+
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Cl}{Cl}
+
+\newtheorem*{utv}{Утверждение}
+\newtheorem*{thm}{Теорема}
+\newtheorem*{rem}{Замечание}
+\theoremstyle{definition}
+\newtheorem{defin}{Определение}
+\newtheorem*{ddefin}{Определение}
+
+\fancypagestyle{firststyle} 
+{
+\fancyhead[L]{{\slshape {@Kusaka}}}
+\fancyhead[R]{Летние задачи}
+\renewcommand{\headrulewidth}{0.2 mm} 
+\fancyfoot{} 
+}
+
+\begin{document}
+
+\thispagestyle{firststyle}
+
+\centerline{\bf Серия 1}
+
+%\enlargethispage{1\baselineskip}
+
+\q1. Докажите, что число $4^n(8k - 1)$ не представимо в виде суммы трех квадратов целых чисел.
+
+\q2. В графе любое ребро инцедентно с вершиной, степень которой  не превосходит четырех. Какое наибольшее количество ребер может быть в таком графе, если вершин сорок?
+
+\q3. Докажите неравенство $a^4 + b^4 + c^4 \geq abc(a + b + c)$
+
+\q4. Вычислите $1 \cdot 2 \cdot 3 + 2 \cdot 3 \cdot 4 + \cdot \cdot \cdot + 2020 \cdot 2021 \cdot 2022$
+
+\q5. Три вещественных числа $x, y, z$ удовлетворяют условию \\ $\frac{1}{x + y + z} = \frac{1}{x} + \frac{1}{y} + \frac{1}{z}$. Верно ли, что среди них есть два противоположных?
+
+\q6. $2020$ алкоголиков $2021$ раз соображали на троих, причем никакая тройка не повторялась дважды. Докажите, что найдутся две тройки, которые пересекаются ровно по одному алкоголику.
+
+\q70. Окружность $\Omega$ пересекает стороны $BC, CA, AB$ треугольника $ABC$ в точках $A_1, A_2; B_1, B_2$ и $C_1, C_2$ соответственно. Оказалось, что прямые $AA_1, BB_1, CC_1$ пересекаются в одной точке. Докажие, что тогда и прямые $AA_2, BB_2, CC_2$ также пересекаются в одной точке.
+
+
+\end{document}\documentclass{article}
