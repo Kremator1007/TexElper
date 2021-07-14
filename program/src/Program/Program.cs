@@ -5,14 +5,13 @@ class ProgramToFindDuplicates
     public ProgramToFindDuplicates() { }
     public void RunProgram()
     {
-        var inputData = ioHandler.readInputForFindingSimilarProblems();
-        var resultData = backendRunner.processInput(inputData);
+        var inputData = ioHandler.ReadInputForFindingSimilarProblems();
+        var resultData = backendRunner.ProcessInput(inputData);
         printer.Display(resultData);
     }
-    private IOHandler ioHandler;
-    private BackendRunner backendRunner;
-    private PrettyPrinter printer;
-
+    private readonly IOHandler ioHandler;
+    private readonly BackendRunner backendRunner;
+    private readonly PrettyPrinter printer;
 }
 
 class MainClass
@@ -23,4 +22,3 @@ class MainClass
         program.RunProgram();
     }
 }
-

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 
 
-record Problem(string text, System.IO.FileInfo fileOfTheProblem);
+public record Problem(string Text, System.IO.FileInfo FileOfTheProblem);
 
+record InputData(List<System.IO.FileInfo> AllRelevantFiles,
+    List<System.IO.FileInfo> CheckedFiles);
 
-record FileWithProblems(List<Problem> problems);
+record FileWithProblems(List<Problem> Problems);
 
-record SimilarProblemsCase(Problem fst, Problem snd);
+record SimilarProblemsCase(Problem Fst, Problem Snd);
 
-
-record ResultData(List<SimilarProblemsCase> similarProblemsCases);
+record ResultData(List<SimilarProblemsCase> SimilarProblemsCases);

@@ -4,9 +4,9 @@ using UsefulExtensions;
 
 class BasicBackendRunner : BackendRunner
 {
-    public override ResultData processInput(InputData inputData)
+    public override ResultData ProcessInput(InputData inputData)
     {
-        var filesWithProblems = inputData.allRelevantFiles.Select(
+        var filesWithProblems = inputData.AllRelevantFiles.Select(
             fileInfo => new FileWithProblems(FileProcessor.ReadFile(fileInfo))
         );
         return pairwiseCompareFiles(filesWithProblems);
@@ -14,20 +14,21 @@ class BasicBackendRunner : BackendRunner
 
     private ResultData pairwiseCompareFiles(IEnumerable<FileWithProblems> files)
     {
-        var similarities = files.Pairwise()
-                             .SelectMany(pairOfFiles => compareTwoFiles(pairOfFiles.Item1, pairOfFiles.Item2))
-                             .ToList();
-        return new ResultData(similarProblemsCases: similarities);
+        var similarities = files
+            .Pairwise()
+            .SelectMany(pairOfFiles => CompareTwoFiles(pairOfFiles.Item1, pairOfFiles.Item2))
+            .ToList();
+        return new ResultData(SimilarProblemsCases: similarities);
     }
 
-    private List<SimilarProblemsCase> compareTwoFiles(FileWithProblems fst, FileWithProblems snd) =>
-        Tools.CartesianProduct(fst.problems, snd.problems)
-             .Where(pairOfProblems => compareTwoProblems(pairOfProblems.Item1, pairOfProblems.Item2))
+    private static List<SimilarProblemsCase> CompareTwoFiles(FileWithProblems fst, FileWithProblems snd) =>
+        Tools.CartesianProduct(fst.Problems, snd.Problems)
+             .Where(pairOfProblems => CompareTwoProblems(pairOfProblems.Item1, pairOfProblems.Item2))
              .Select(pairOfProblems => new SimilarProblemsCase(pairOfProblems.Item1, pairOfProblems.Item2))
              .ToList();
 
-    private bool compareTwoProblems(Problem fst, Problem snd)
+    private static bool CompareTwoProblems(Problem fst, Problem snd)
     {
-        return Tools.LevenshteinDistance(fst.text, snd.text) < 42;
+        return Tools.LevenshteinDistance(fst.Text, snd.Text) < 42;
     }
 }

@@ -4,7 +4,7 @@ public partial class Tools
 {
     public static int LevenshteinDistance(string a, string b)
     {
-        string tailA = a.Substring(1), tailB = b.Substring(1);
+        string tailA = a[1..], tailB = b[1..];
         if (a.Length == 0 || b.Length == 0)
         {
             return System.Math.Max(a.Length, b.Length);
@@ -15,7 +15,7 @@ public partial class Tools
         }
         else
         {
-            return 1 + (new List<int>()
+            return 1 + (new int[]
             {
                 LevenshteinDistance(a, tailB),
                 LevenshteinDistance(tailA, b),
