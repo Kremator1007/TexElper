@@ -2,6 +2,9 @@ class ActualProblemComparer : ProblemComparer
 {
     public override bool AreTwoProblemsSimilar(Problem fst, Problem snd)
     {
-        return Tools.LevenshteinDistance(fst.Text, snd.Text) < 42;
+        if (System.Math.Abs(fst.Text.Length - snd.Text.Length) >= 42)
+            return false;
+        else
+            return Tools.LevenshteinDistance(fst.Text, snd.Text) < 42;
     }
 }
