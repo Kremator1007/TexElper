@@ -9,10 +9,10 @@ class BasicBackendRunner : BackendRunner
         var filesWithProblems = inputData.AllRelevantFiles.Select(
             fileInfo => new FileWithProblems(FileProcessor.ReadFile(fileInfo))
         );
-        return pairwiseCompareFiles(filesWithProblems);
+        return PairwiseCompareFiles(filesWithProblems);
     }
 
-    private ResultData pairwiseCompareFiles(IEnumerable<FileWithProblems> files)
+    private ResultData PairwiseCompareFiles(IEnumerable<FileWithProblems> files)
     {
         var similarities = files
             .Pairwise()
@@ -21,14 +21,15 @@ class BasicBackendRunner : BackendRunner
         return new ResultData(SimilarProblemsCases: similarities);
     }
 
-    private static List<SimilarProblemsCase> CompareTwoFiles(FileWithProblems fst, FileWithProblems snd) =>
+    private List<SimilarProblemsCase> CompareTwoFiles(FileWithProblems fst, FileWithProblems snd) =>
         Tools.CartesianProduct(fst.Problems, snd.Problems)
              .Where(pairOfProblems => CompareTwoProblems(pairOfProblems.Item1, pairOfProblems.Item2))
              .Select(pairOfProblems => new SimilarProblemsCase(pairOfProblems.Item1, pairOfProblems.Item2))
              .ToList();
 
-    private static bool CompareTwoProblems(Problem fst, Problem snd)
+    private bool CompareTwoProblems(Problem fst, Problem snd)
     {
-        return Tools.LevenshteinDistance(fst.Text, snd.Text) < 42;
+        return problemComparer.CompareTwoProblems(fst, snd);
     }
+    private readonly ProblemComparer problemComparer = new ActualProblemComparer();
 }
