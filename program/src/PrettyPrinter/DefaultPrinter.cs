@@ -12,6 +12,7 @@ class DefaultPrinter : PrettyPrinter
             System.Console.Write("2: " + similarProblemCase.Snd.Text + "\n");
             System.Console.Write("\n\n");
         }
+        System.Console.WriteLine("Press any key to quit");
         System.Console.ReadKey();
     }
 }

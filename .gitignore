@@ -3,3 +3,5 @@ obj/
 .vscode/
 .vs/
 program/.vscode/
+coveragereport/
+tests/TestResults/
