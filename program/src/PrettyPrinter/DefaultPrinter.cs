@@ -8,10 +8,10 @@ class DefaultPrinter : PrettyPrinter
         {
             System.Console.Write($"In files {similarProblemCase.Fst.FileOfTheProblem.Name} and " +
                                  $"{similarProblemCase.Snd.FileOfTheProblem.Name} with the text:\n");
-            System.Console.Write("1." + similarProblemCase.Fst.Text + "\n");
-            System.Console.Write("2." + similarProblemCase.Snd.Text + "\n");
+            System.Console.Write("1: " + similarProblemCase.Fst.Text + "\n");
+            System.Console.Write("2: " + similarProblemCase.Snd.Text + "\n");
             System.Console.Write("\n\n");
-
         }
+        System.Console.ReadKey();
     }
 }
