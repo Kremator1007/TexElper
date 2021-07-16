@@ -2,7 +2,7 @@ class DefaultPrinter : PrettyPrinter
 {
     public override void Display(ResultData resultData)
     {
-        System.Console.Write($"There were {resultData.SimilarProblemsCases.Count} " +
+        System.Console.Write($"There are {resultData.SimilarProblemsCases.Count} cases of " +
                               "suspected problems repetition:\n\n\n");
         foreach (var similarProblemCase in resultData.SimilarProblemsCases)
         {
