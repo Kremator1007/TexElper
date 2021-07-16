@@ -2,12 +2,17 @@
 
 class ProgramToFindDuplicates
 {
-    public ProgramToFindDuplicates() { }
-    public void RunProgram()
+    public ProgramToFindDuplicates()
+    {
+        ioHandler = new FilesInCurrentFolderSelector();
+        backendRunner = new BasicBackendRunner(new ActualProblemComparer());
+    }
+    public ResultData RunProgram()
     {
         var inputData = ioHandler.ReadInputForFindingSimilarProblems();
         var resultData = backendRunner.ProcessInput(inputData);
-        printer.Display(resultData);
+        printer?.Display(resultData);
+        return resultData;
     }
     private readonly IOHandler ioHandler;
     private readonly BackendRunner backendRunner;
@@ -19,6 +24,6 @@ class MainClass
     public static void Main()
     {
         var program = new ProgramToFindDuplicates();
-        program.RunProgram();
+        _ = program.RunProgram();
     }
 }

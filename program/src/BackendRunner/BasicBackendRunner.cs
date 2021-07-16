@@ -2,8 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UsefulExtensions;
 
-class BasicBackendRunner : BackendRunner
+public class BasicBackendRunner : BackendRunner
 {
+    public BasicBackendRunner(ProblemComparer comparer)
+        => problemComparer = comparer;
+
     public override ResultData ProcessInput(InputData inputData)
     {
         var filesWithProblems = inputData.AllRelevantFiles.Select(
@@ -23,13 +26,13 @@ class BasicBackendRunner : BackendRunner
 
     private List<SimilarProblemsCase> CompareTwoFiles(FileWithProblems fst, FileWithProblems snd) =>
         Tools.CartesianProduct(fst.Problems, snd.Problems)
-             .Where(pairOfProblems => CompareTwoProblems(pairOfProblems.Item1, pairOfProblems.Item2))
+             .Where(pairOfProblems => AreTwoProblemsSimilar(pairOfProblems.Item1, pairOfProblems.Item2))
              .Select(pairOfProblems => new SimilarProblemsCase(pairOfProblems.Item1, pairOfProblems.Item2))
              .ToList();
 
-    private bool CompareTwoProblems(Problem fst, Problem snd)
+    private bool AreTwoProblemsSimilar(Problem fst, Problem snd)
     {
         return problemComparer.AreTwoProblemsSimilar(fst, snd);
     }
-    private readonly ProblemComparer problemComparer = new ActualProblemComparer();
+    private readonly ProblemComparer problemComparer;
 }
