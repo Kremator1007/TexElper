@@ -1,4 +1,4 @@
-abstract class ProblemComparer
+public abstract class ProblemComparer
 {
-    public abstract bool CompareTwoProblems(Problem fst, Problem snd);
+    public abstract bool AreTwoProblemsSimilar(Problem fst, Problem snd);
 }

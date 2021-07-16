@@ -56,6 +56,8 @@ public class FileProcessor
             return false;
         else if (s.StartsWith(@"\q") || s.StartsWith(@"\end"))
             return false;
+        else if (s.StartsWith("%"))
+            return false;
         else
             return true;
     }

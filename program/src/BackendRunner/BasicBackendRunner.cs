@@ -29,7 +29,7 @@ class BasicBackendRunner : BackendRunner
 
     private bool CompareTwoProblems(Problem fst, Problem snd)
     {
-        return problemComparer.CompareTwoProblems(fst, snd);
+        return problemComparer.AreTwoProblemsSimilar(fst, snd);
     }
     private readonly ProblemComparer problemComparer = new ActualProblemComparer();
 }
