@@ -1,17 +1,18 @@
 ﻿using System;
 
-class ProgramToFindDuplicates
+public class ProgramToFindDuplicates
 {
     public ProgramToFindDuplicates()
     {
         ioHandler = new FilesInCurrentFolderSelector();
         backendRunner = new BasicBackendRunner(new ActualProblemComparer());
+        printer = new DefaultPrinter();
     }
     public ResultData RunProgram()
     {
         var inputData = ioHandler.ReadInputForFindingSimilarProblems();
         var resultData = backendRunner.ProcessInput(inputData);
-        printer?.Display(resultData);
+        printer.Display(resultData);
         return resultData;
     }
     private readonly IOHandler ioHandler;

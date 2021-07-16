@@ -4,22 +4,21 @@ public partial class Tools
 {
     public static int LevenshteinDistance(string a, string b)
     {
-        string tailA = a[1..], tailB = b[1..];
         if (a.Length == 0 || b.Length == 0)
         {
             return System.Math.Max(a.Length, b.Length);
         }
         else if (a[0] == b[0])
         {
-            return LevenshteinDistance(tailA, tailB);
+            return LevenshteinDistance(a[1..], b[1..]);
         }
         else
         {
             return 1 + (new int[]
             {
-                LevenshteinDistance(a, tailB),
-                LevenshteinDistance(tailA, b),
-                LevenshteinDistance(tailA, tailB)
+                LevenshteinDistance(a, b[1..]),
+                LevenshteinDistance(a[1..], b),
+                LevenshteinDistance(a[1..], b[1..])
             }).Min();
         }
     }

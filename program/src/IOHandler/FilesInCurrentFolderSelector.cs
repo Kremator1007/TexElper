@@ -6,8 +6,8 @@ class FilesInCurrentFolderSelector : IOHandler
     public override InputData ReadInputForFindingSimilarProblems()
     {
         var files = System.IO.Directory.EnumerateFiles(SearchPath)
-                .Select((string fileName) => fileName.EndsWith(".tex"))
-                .Cast<System.IO.FileInfo>()
+                .Where((string fileName) => fileName.EndsWith(".tex"))
+                .Select((string path) => new System.IO.FileInfo(path))
                 .ToList();
         return new InputData(files, files);
     }
