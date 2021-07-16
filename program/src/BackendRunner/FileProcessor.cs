@@ -8,7 +8,6 @@ public class FileProcessor
     public static List<Problem> ReadFile(System.IO.FileInfo fileInfo)
     {
         var problems = new List<Problem>();
-        System.Console.WriteLine(fileInfo.FullName);
         string[] lines = System.IO.File.ReadAllLines(fileInfo.FullName);
         string[] docLines = TrimRedundantTexParts(lines);
         for (int i = 0; i < docLines.Length;)

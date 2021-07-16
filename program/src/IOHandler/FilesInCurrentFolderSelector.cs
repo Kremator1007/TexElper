@@ -1,10 +1,9 @@
 using System.Linq;
 class FilesInCurrentFolderSelector : IOHandler
 {
-    public FilesInCurrentFolderSelector() =>
-        SearchPath = AskUserForTheDirectory();
     public override InputData ReadInputForFindingSimilarProblems()
     {
+        string SearchPath = AskUserForTheDirectory();
         var files = System.IO.Directory.EnumerateFiles(SearchPath)
                 .Where((string fileName) => fileName.EndsWith(".tex"))
                 .Select((string path) => new System.IO.FileInfo(path))
@@ -20,5 +19,4 @@ class FilesInCurrentFolderSelector : IOHandler
         if (input == "") return curDir;
         else return input ?? curDir;
     }
-    private readonly string SearchPath;
 }

@@ -2,24 +2,49 @@ using System.Collections.Generic;
 using System.Linq;
 public partial class Tools
 {
-    public static int LevenshteinDistance(string a, string b)
+    //copied from https://www.csharpstar.com/csharp-string-distance-algorithm/
+    public static int LevenshteinDistance(string s, string t)
     {
-        if (a.Length == 0 || b.Length == 0)
+        int n = s.Length;
+        int m = t.Length;
+        int[,] d = new int[n + 1, m + 1];
+
+        // Step 1
+        if (n == 0)
         {
-            return System.Math.Max(a.Length, b.Length);
+            return m;
         }
-        else if (a[0] == b[0])
+
+        if (m == 0)
         {
-            return LevenshteinDistance(a[1..], b[1..]);
+            return n;
         }
-        else
+
+        // Step 2
+        for (int i = 0; i <= n; d[i, 0] = i++)
         {
-            return 1 + (new int[]
+        }
+
+        for (int j = 0; j <= m; d[0, j] = j++)
+        {
+        }
+
+        // Step 3
+        for (int i = 1; i <= n; i++)
+        {
+            //Step 4
+            for (int j = 1; j <= m; j++)
             {
-                LevenshteinDistance(a, b[1..]),
-                LevenshteinDistance(a[1..], b),
-                LevenshteinDistance(a[1..], b[1..])
-            }).Min();
+                // Step 5
+                int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+
+                // Step 6
+                d[i, j] = System.Math.Min(
+                    System.Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                    d[i - 1, j - 1] + cost);
+            }
         }
+        // Step 7
+        return d[n, m];
     }
 }
