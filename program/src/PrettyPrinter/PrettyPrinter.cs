@@ -1,4 +1,4 @@
-abstract class PrettyPrinter
+interface IPrettyPrinter
 {
     public abstract void Display(ResultData resultData);
 }

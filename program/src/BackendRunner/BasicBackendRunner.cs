@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UsefulExtensions;
 
-public class BasicBackendRunner : BackendRunner
+public class BasicBackendRunner : IBackendRunner
 {
-    public BasicBackendRunner(ProblemComparer comparer)
+    public BasicBackendRunner(IProblemComparer comparer)
         => problemComparer = comparer;
 
-    public override ResultData ProcessInput(InputData inputData)
+    public ResultData ProcessInput(InputData inputData)
     {
         var filesWithProblems = inputData.AllRelevantFiles.Select(
             fileInfo => new FileWithProblems(FileProcessor.ReadFile(fileInfo))
@@ -34,5 +34,5 @@ public class BasicBackendRunner : BackendRunner
     {
         return problemComparer.AreTwoProblemsSimilar(fst, snd);
     }
-    private readonly ProblemComparer problemComparer;
+    private readonly IProblemComparer problemComparer;
 }

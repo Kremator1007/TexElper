@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public abstract class BackendRunner
+public interface IBackendRunner
 {
     public abstract ResultData ProcessInput(InputData inputData);
 }

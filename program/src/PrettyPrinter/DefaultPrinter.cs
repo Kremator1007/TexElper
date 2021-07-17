@@ -1,6 +1,6 @@
-class DefaultPrinter : PrettyPrinter
+class DefaultPrinter : IPrettyPrinter
 {
-    public override void Display(ResultData resultData)
+    public void Display(ResultData resultData)
     {
         System.Console.Write($"There are {resultData.SimilarProblemsCases.Count} cases of " +
                               "suspected problems repetition:\n\n\n");

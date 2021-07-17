@@ -1,6 +1,6 @@
-public class DummyProblemComparer : ProblemComparer
+public class DummyProblemComparer : IProblemComparer
 {
-    public override bool AreTwoProblemsSimilar(Problem fst, Problem snd)
+    public bool AreTwoProblemsSimilar(Problem fst, Problem snd)
     {
         return System.Math.Abs(fst.Text.Length - snd.Text.Length) <= 5;
     }

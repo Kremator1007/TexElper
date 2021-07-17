@@ -16,8 +16,8 @@ public class ProgramToFindDuplicates
         return resultData;
     }
     private readonly IOHandler ioHandler;
-    private readonly BackendRunner backendRunner;
-    private readonly PrettyPrinter printer;
+    private readonly IBackendRunner backendRunner;
+    private readonly IPrettyPrinter printer;
 }
 
 class MainClass
