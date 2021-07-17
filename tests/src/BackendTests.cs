@@ -20,6 +20,7 @@ namespace tests
 
         [Theory]
         [InlineData(1, "test3/")]
+        [InlineData(1, "test4/")]
         public void CompareFiles_ReadFilesOnLineBreaks_CountsProperly(
             int expectedNumOfSimilarities,
             string pathRelativeToMedia)

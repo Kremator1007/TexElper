@@ -48,7 +48,7 @@ public class TexFileReader
     {
         s = s.Trim();
         if (s == "")
-            return false;
+            return true;
         else if (s.StartsWith(@"\q") || s.StartsWith(@"\end"))
             return false;
         else if (s.StartsWith("%"))
