@@ -36,15 +36,11 @@ public class TexFileReader
         var lineCount = 1;
         //second line clears preceding \q
         problemText.Append(lines[startingLine].TrimStart()[2..].TrimStart());
-        _ = lines
-            .Skip(startingLine)
-            .TakeWhile(ContinuesTheProblem)
-            .Select((string line) =>
-            {
-                problemText.AppendLine(line);
-                ++lineCount;
-                return line;
-            });
+        var problemLines = lines
+            .Skip(startingLine + 1)
+            .TakeWhile(ContinuesTheProblem);
+        foreach (string problemLine in problemLines)
+            problemText.AppendLine(problemLine);
         return (new Problem(problemText.ToString(), fileInfo), lineCount);
     }
 

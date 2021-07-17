@@ -11,7 +11,7 @@ public class ProgramToFindDuplicates
     public ResultData RunProgram()
     {
         var inputData = filesSelector.SelectFilesForFindingSimilarProblems();
-        var resultData = backendFileComparer.ProcessInput(inputData);
+        var resultData = backendFileComparer.CompareFiles(inputData);
         printer.Display(resultData);
         return resultData;
     }

@@ -7,7 +7,7 @@ public class BasicFileComparer : IBackendFileComparer
     public BasicFileComparer(IProblemComparer comparer)
         => problemComparer = comparer;
 
-    public ResultData ProcessInput(FilesToCompare inputData)
+    public ResultData CompareFiles(FilesToCompare inputData)
     {
         var filesWithProblems = inputData.AllRelevantFiles.Select(
             fileInfo => new FileWithProblems(TexFileReader.ReadFile(fileInfo))
