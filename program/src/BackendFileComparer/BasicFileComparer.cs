@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UsefulExtensions;
 
-public class BasicBackendRunner : IBackendRunner
+public class BasicFileComparer : IBackendFileComparer
 {
-    public BasicBackendRunner(IProblemComparer comparer)
+    public BasicFileComparer(IProblemComparer comparer)
         => problemComparer = comparer;
 
-    public ResultData ProcessInput(InputData inputData)
+    public ResultData ProcessInput(FilesToCompare inputData)
     {
         var filesWithProblems = inputData.AllRelevantFiles.Select(
-            fileInfo => new FileWithProblems(FileProcessor.ReadFile(fileInfo))
+            fileInfo => new FileWithProblems(TexFileReader.ReadFile(fileInfo))
         );
         return PairwiseCompareFiles(filesWithProblems);
     }

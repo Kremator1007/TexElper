@@ -1,14 +1,14 @@
 using System.Linq;
-class FilesInCurrentFolderSelector : IOHandler
+class FilesInUserAskedFolderSelector : FilesSelector
 {
-    public override InputData ReadInputForFindingSimilarProblems()
+    public FilesToCompare SelectFilesForFindingSimilarProblems()
     {
         string SearchPath = AskUserForTheDirectory();
         var files = System.IO.Directory.EnumerateFiles(SearchPath)
                 .Where((string fileName) => fileName.EndsWith(".tex"))
                 .Select((string path) => new System.IO.FileInfo(path))
                 .ToList();
-        return new InputData(files, files);
+        return new FilesToCompare(files);
     }
     private static string AskUserForTheDirectory()
     {

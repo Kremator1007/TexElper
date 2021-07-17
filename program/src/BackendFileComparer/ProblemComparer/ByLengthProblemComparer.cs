@@ -1,4 +1,4 @@
-public class DummyProblemComparer : IProblemComparer
+public class ByLengthProblemComparer : IProblemComparer
 {
     public bool AreTwoProblemsSimilar(Problem fst, Problem snd)
     {

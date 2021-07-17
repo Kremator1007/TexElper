@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 public record Problem(string Text, System.IO.FileInfo FileOfTheProblem);
 
-public record InputData(List<System.IO.FileInfo> AllRelevantFiles,
-    List<System.IO.FileInfo> CheckedFiles);
+public record FilesToCompare(List<System.IO.FileInfo> AllRelevantFiles);
 
 public record FileWithProblems(List<Problem> Problems);
 

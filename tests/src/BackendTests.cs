@@ -15,8 +15,8 @@ namespace tests
                 new System.IO.FileInfo(testDir + "a.tex"),
                 new System.IO.FileInfo(testDir + "b.tex")
             };
-            var inputData = new InputData(files, files);
-            var result = new BasicBackendRunner(new DummyProblemComparer()).ProcessInput(inputData);
+            var inputData = new FilesToCompare(files);
+            var result = new BasicFileComparer(new ByLengthProblemComparer()).ProcessInput(inputData);
             Assert.Empty(result.SimilarProblemsCases);
         }
         [Fact]
@@ -28,8 +28,8 @@ namespace tests
                 new System.IO.FileInfo(testDir + "a.tex"),
                 new System.IO.FileInfo(testDir + "b.tex")
             };
-            var inputData = new InputData(files, files);
-            var result = new BasicBackendRunner(new DummyProblemComparer()).ProcessInput(inputData);
+            var inputData = new FilesToCompare(files);
+            var result = new BasicFileComparer(new ByLengthProblemComparer()).ProcessInput(inputData);
             Assert.Equal(4, result.SimilarProblemsCases.Count);
         }
     }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-public class FileProcessor
+public class TexFileReader
 {
     public static List<Problem> ReadFile(System.IO.FileInfo fileInfo)
     {
