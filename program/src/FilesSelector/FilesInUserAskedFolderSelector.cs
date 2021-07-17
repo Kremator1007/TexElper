@@ -1,5 +1,5 @@
 using System.Linq;
-class FilesInUserAskedFolderSelector : FilesSelector
+public class FilesInUserAskedFolderSelector : FilesSelector
 {
     public FilesInUserAskedFolderSelector(string? MaybeSpecifiedDirectory = null) =>
         this.MaybeSpecifiedDirectory = MaybeSpecifiedDirectory;

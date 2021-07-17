@@ -1,4 +1,4 @@
-class ByLevenshteinProblemComparer : IProblemComparer
+public class ByLevenshteinProblemComparer : IProblemComparer
 {
     public bool AreTwoProblemsSimilar(Problem fst, Problem snd)
     {

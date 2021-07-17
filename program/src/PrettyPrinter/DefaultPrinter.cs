@@ -1,4 +1,4 @@
-class DefaultPrinter : IPrettyPrinter
+public class DefaultPrinter : IPrettyPrinter
 {
     public void Display(ResultData resultData)
     {
