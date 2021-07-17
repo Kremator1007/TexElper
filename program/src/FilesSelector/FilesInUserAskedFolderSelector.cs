@@ -1,15 +1,19 @@
 using System.Linq;
 class FilesInUserAskedFolderSelector : FilesSelector
 {
+    public FilesInUserAskedFolderSelector(string? MaybeSpecifiedDirectory = null) =>
+        this.MaybeSpecifiedDirectory = MaybeSpecifiedDirectory;
+
     public FilesToCompare SelectFilesForFindingSimilarProblems()
     {
-        string SearchPath = AskUserForTheDirectory();
+        string SearchPath = MaybeSpecifiedDirectory ?? AskUserForTheDirectory();
         var files = System.IO.Directory.EnumerateFiles(SearchPath)
                 .Where((string fileName) => fileName.EndsWith(".tex"))
                 .Select((string path) => new System.IO.FileInfo(path))
                 .ToList();
         return new FilesToCompare(files);
     }
+
     private static string AskUserForTheDirectory()
     {
         string curDir = System.IO.Directory.GetCurrentDirectory();
@@ -19,4 +23,6 @@ class FilesInUserAskedFolderSelector : FilesSelector
         if (input == "") return curDir;
         else return input ?? curDir;
     }
+
+    private readonly string? MaybeSpecifiedDirectory;
 }
