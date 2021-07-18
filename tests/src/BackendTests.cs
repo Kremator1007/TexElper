@@ -36,10 +36,10 @@ namespace tests
             if (testDir[^1] != '/')
                 testDir += "/";
 
-            List<System.IO.FileInfo> files = new()
+            List<string> files = new()
             {
-                new System.IO.FileInfo(testDir + "a.tex"),
-                new System.IO.FileInfo(testDir + "b.tex")
+                testDir + "a.tex",
+                testDir + "b.tex"
             };
             return new FilesToCompare(files);
         }

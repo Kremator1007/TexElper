@@ -10,7 +10,7 @@ public class BasicFileComparer : IBackendFileComparer
     public ResultData CompareFiles(FilesToCompare inputData)
     {
         var filesWithProblems = inputData.AllRelevantFiles.Select(
-            fileInfo => new FileWithProblems(TexFileReader.ReadFile(fileInfo))
+            filePath => new FileWithProblems(TexFileReader.ReadFile(filePath))
         );
         return PairwiseCompareFiles(filesWithProblems);
     }

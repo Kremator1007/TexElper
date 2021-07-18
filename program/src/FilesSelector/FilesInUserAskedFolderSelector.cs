@@ -9,7 +9,6 @@ public class FilesInUserAskedFolderSelector : FilesSelector
         string SearchPath = MaybeSpecifiedDirectory ?? AskUserForTheDirectory();
         var files = System.IO.Directory.EnumerateFiles(SearchPath)
                 .Where((string fileName) => fileName.EndsWith(".tex"))
-                .Select((string path) => new System.IO.FileInfo(path))
                 .ToList();
         return new FilesToCompare(files);
     }

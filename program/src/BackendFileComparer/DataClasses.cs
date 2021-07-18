@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
 
-public record Problem(string Text, System.IO.FileInfo FileOfTheProblem);
+public record Problem(string Text, string PathToTheFileOfTheProblem);
 
-public record FilesToCompare(List<System.IO.FileInfo> AllRelevantFiles);
+public record FilesToCompare(List<string> AllRelevantFiles);
 
 public record FileWithProblems(List<Problem> Problems);
 

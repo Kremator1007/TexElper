@@ -9,8 +9,8 @@ namespace tests
         public void Test1()
         {
             string testDir = "../../../media/test1/";
-            var fstProbs = TexFileReader.ReadFile(new System.IO.FileInfo(testDir + "a.tex"));
-            var sndProbs = TexFileReader.ReadFile(new System.IO.FileInfo(testDir + "b.tex"));
+            var fstProbs = TexFileReader.ReadFile(testDir + "a.tex");
+            var sndProbs = TexFileReader.ReadFile(testDir + "b.tex");
             Assert.Equal(2, fstProbs.Count);
             Assert.Equal(2, sndProbs.Count);
             Assert.True(new ByLengthProblemComparer().AreTwoProblemsSimilar(fstProbs[0],

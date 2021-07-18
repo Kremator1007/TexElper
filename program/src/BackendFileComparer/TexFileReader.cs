@@ -5,17 +5,18 @@ using System.Text.RegularExpressions;
 
 public class TexFileReader
 {
-    public static List<Problem> ReadFile(System.IO.FileInfo fileInfo)
+    public static List<Problem> ReadFile(string pathToTheFile)
     {
         var problems = new List<Problem>();
-        string[] lines = System.IO.File.ReadAllLines(fileInfo.FullName);
+        string[] lines = System.IO.File.ReadAllLines(pathToTheFile);
         string[] docLines = TrimRedundantTexParts(lines);
         for (int i = 0; i < docLines.Length;)
         {
             var currentLine = docLines[i];
             if (currentLine.TrimStart(' ', '\t').StartsWith(@"\q"))
             {
-                var (problem, lineCount) = ReadProblemStartingFromLine(docLines, i, fileInfo);
+                var (problem, lineCount) = ReadProblemStartingFromLine(
+                    docLines, i, pathToTheFile);
                 problems.Add(problem);
                 i += lineCount;
             }
@@ -30,7 +31,7 @@ public class TexFileReader
     private static (Problem, int) ReadProblemStartingFromLine(
         string[] lines,
         int startingLine,
-        System.IO.FileInfo fileInfo)
+        string pathToTheFileOfTheProblem)
     {
         var problemText = new StringBuilder();
         var lineCount = 1;
@@ -41,7 +42,8 @@ public class TexFileReader
             .TakeWhile(ContinuesTheProblem);
         foreach (string problemLine in problemLines)
             problemText.AppendLine(problemLine);
-        return (new Problem(problemText.ToString(), fileInfo), lineCount);
+        return (new Problem(problemText.ToString(), pathToTheFileOfTheProblem),
+            lineCount);
     }
 
     private static bool ContinuesTheProblem(string s)
