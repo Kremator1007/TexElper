@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\program\TexElper.csproj" />
+    <ProjectReference Include="..\ProgramLib\ProgramLib.csproj" />
   </ItemGroup>
     <PropertyGroup>
     <OutputType>Exe</OutputType>
