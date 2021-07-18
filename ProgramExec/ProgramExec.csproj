@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ProgramLib\ProgramLib.csproj" />
+    <ProjectReference Include="..\ProgramLib\TexElper.csproj" />
   </ItemGroup>
-    <PropertyGroup>
+
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
 </Project>

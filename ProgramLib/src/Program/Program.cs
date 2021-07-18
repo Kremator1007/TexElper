@@ -19,12 +19,3 @@ public class ProgramToFindDuplicates
     private readonly IBackendFileComparer backendFileComparer;
     private readonly IPrettyPrinter printer;
 }
-
-class MainClass
-{
-    public static void Main()
-    {
-        var program = new ProgramToFindDuplicates();
-        _ = program.RunProgram();
-    }
-}

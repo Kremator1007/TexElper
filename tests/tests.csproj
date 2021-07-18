@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\program\TexElper.csproj" />
+    <ProjectReference Include="..\ProgramLib\ProgramLib.csproj" />
   </ItemGroup>
 
 </Project>
