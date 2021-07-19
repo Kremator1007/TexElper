@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-interface FilesSelector
+public interface IFilesSelector
 {
-    public abstract FilesToCompare SelectFilesForFindingSimilarProblems();
+    public FilesToCompare SelectFilesForFindingSimilarProblems();
 }

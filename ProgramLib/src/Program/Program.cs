@@ -4,7 +4,7 @@ public class ProgramToFindDuplicates
 {
     public ProgramToFindDuplicates()
     {
-        filesSelector = new FilesInUserAskedFolderSelector();
+        filesSelector = new FilesByDirectoriesSelector(new UserAskedDirectoriesSelector());
         backendFileComparer = new BasicFileComparer(new ByLevenshteinProblemComparer());
         printer = new DefaultPrinter();
     }
@@ -15,7 +15,7 @@ public class ProgramToFindDuplicates
         printer.Display(resultData);
         return resultData;
     }
-    private readonly FilesSelector filesSelector;
+    private readonly IFilesSelector filesSelector;
     private readonly IBackendFileComparer backendFileComparer;
     private readonly IPrettyPrinter printer;
 }
