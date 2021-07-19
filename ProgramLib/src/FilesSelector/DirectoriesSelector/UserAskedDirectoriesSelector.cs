@@ -17,14 +17,14 @@ public class UserAskedDirectoriesSelector : IDirectoriesSelector
 
     private static void PrintWarningOnTheNumberOfExistingDirs(int numOfExistingDirs)
     {
-        Console.WriteLine($"{numOfExistingDirs} directories were succesfully found");
+        Console.WriteLine($"{numOfExistingDirs} directories were successfully found");
     }
 
     private static void PrintEnterMessage(string curDir)
     {
         System.Console.WriteLine("Please enter the directories with files; otherwise " +
-                                $"the current directory will be used ({curDir})");
-        System.Console.WriteLine("After	 inputting all the directories, press enter");
+                                $"the current directory will be used ({curDir}).");
+        System.Console.WriteLine("After	inputting all the directories, press enter:");
     }
 
 }
