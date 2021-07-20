@@ -1,5 +1,6 @@
 using System.Linq;
 using System.IO;
+using UsefulExtensions;
 
 public class FilesByDirectoriesSelector : IFilesSelector
 {
@@ -7,9 +8,11 @@ public class FilesByDirectoriesSelector : IFilesSelector
         => this.dirSelector = dirSelector;
 
     public FilesToCompare SelectFilesForFindingSimilarProblems() =>
-        new(dirSelector.SelectDirs().SelectMany(
-            (string pathToDir) => Directory.EnumerateFiles(pathToDir, "*.tex"))
-                .ToList());
+        new(dirSelector.SelectDirs()
+            .ForEach(dirPath => Serilog.Log.Information($"Directory {dirPath} selected successfully"))
+            .SelectMany(
+                (string pathToDir) => Directory.EnumerateFiles(pathToDir, "*.tex"))
+            .ToList());
 
     private readonly IDirectoriesSelector dirSelector;
 }

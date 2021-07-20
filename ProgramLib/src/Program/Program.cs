@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Serilog;
 public class ProgramToFindDuplicates
 {
     public ProgramToFindDuplicates()
@@ -10,6 +10,10 @@ public class ProgramToFindDuplicates
     }
     public ResultData RunProgram()
     {
+        Serilog.Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Verbose()
+            .WriteTo.File("log.txt")
+            .CreateLogger();
         var inputData = filesSelector.SelectFilesForFindingSimilarProblems();
         var resultData = backendFileComparer.CompareFiles(inputData);
         printer.Display(resultData);

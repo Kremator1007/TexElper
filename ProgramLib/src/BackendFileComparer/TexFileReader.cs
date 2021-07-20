@@ -33,6 +33,8 @@ public class TexFileReader
         int startingLine,
         string pathToTheFileOfTheProblem)
     {
+        Serilog.Log.Verbose("Starting reading problem in file \"{File}\" on line \n\"{Line}\"",
+        pathToTheFileOfTheProblem, lines[startingLine]);
         var problemText = new StringBuilder();
         var lineCount = 1;
         //second line clears preceding \q
