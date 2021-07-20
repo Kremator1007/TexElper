@@ -15,14 +15,14 @@ class ProblemInFileShower
         PrintOuttroMessage();
     }
 
-    private void PrintEntryMessage()
+    private static void PrintEntryMessage()
     {
         Console.WriteLine("Hello there! Choose a file - this program will print " +
         "the problems from the file the way it sees it:");
     }
 
     //returns null if readLine doesnt result in a correct file path
-    private string? SelectFile()
+    private static string? SelectFile()
     {
         string? inputFilePath = Console.ReadLine();
         if (inputFilePath is null)
@@ -38,7 +38,7 @@ class ProblemInFileShower
         else return inputFilePath;
     }
 
-    private void PrintProblems(List<Problem> fileWithProblems)
+    private static void PrintProblems(List<Problem> fileWithProblems)
     {
         foreach (var problem in fileWithProblems)
         {
@@ -48,7 +48,7 @@ class ProblemInFileShower
         }
     }
 
-    private void PrintOuttroMessage()
+    private static void PrintOuttroMessage()
     {
         Console.WriteLine("Press any key to continue");
         _ = Console.ReadKey();
