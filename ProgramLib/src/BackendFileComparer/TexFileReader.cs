@@ -44,8 +44,18 @@ public class TexFileReader
             .TakeWhile(ContinuesTheProblem);
         foreach (string problemLine in problemLines)
             problemText.AppendLine(problemLine);
-        return (new Problem(problemText.ToString(), pathToTheFileOfTheProblem),
+        string problemTextAsString = PreprocessProblemText(problemText);
+        return (new Problem(problemTextAsString, pathToTheFileOfTheProblem),
             lineCount);
+    }
+
+    private static string PreprocessProblemText(StringBuilder problemText)
+    {
+        string problemTextString = problemText.ToString();
+        problemTextString = Regex.Replace(problemTextString, "\n", "  ");
+        problemTextString = Regex.Replace(problemTextString, " +", " ");
+        problemTextString = problemTextString.Trim();
+        return problemTextString;
     }
 
     private static bool ContinuesTheProblem(string s)

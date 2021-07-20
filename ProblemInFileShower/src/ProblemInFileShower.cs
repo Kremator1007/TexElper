@@ -44,7 +44,7 @@ class ProblemInFileShower
         {
             Console.WriteLine("------------begin--------------");
             Console.WriteLine(problem.Text);
-            Console.WriteLine("------------end--------------\n");
+            Console.WriteLine("------------end----------------\n");
         }
     }
 
