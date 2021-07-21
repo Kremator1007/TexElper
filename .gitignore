@@ -6,3 +6,4 @@ program/.vscode/
 coveragereport/
 tests/TestResults/
 log.txt
+*.user
