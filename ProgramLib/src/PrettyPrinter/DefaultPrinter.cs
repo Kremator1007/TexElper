@@ -28,8 +28,6 @@ public class DefaultPrinter : IPrettyPrinter
         System.Console.Write("1: " + similarProblemCase.Fst.Text + "\n");
         System.Console.Write("2: " + similarProblemCase.Snd.Text + "\n");
     }
-
-
     private static void PrintOuttroMessage()
     {
         System.Console.WriteLine("Press any key to quit");

@@ -4,21 +4,33 @@ public class ProgramToFindDuplicates
 {
     public ProgramToFindDuplicates()
     {
-        filesSelector = new FilesByDirectoriesSelector(new UserAskedDirectoriesSelector());
-        backendFileComparer = new BasicFileComparer(new ByLevenshteinProblemComparer());
-        printer = new DefaultPrinter();
+        FilesSelector = new FilesByDirectoriesSelector(new UserAskedDirectoriesSelector());
+        BackendFileComparer = new BasicFileComparer(new ByLevenshteinProblemComparer());
+        Printer = new DefaultPrinter();
     }
     public ResultData RunProgram()
     {
-        var config = ConfigReader.ReadConfig();
-        if (config is ErrorWrapper<Config, string> errorWrapper)
-            Console.WriteLine(errorWrapper.Error);
+        DealWithConfigFile();
         InitLogger();
-        var inputData = filesSelector.SelectFilesForFindingSimilarProblems();
-        var resultData = backendFileComparer.CompareFiles(inputData);
-        printer.Display(resultData);
+        var inputData = FilesSelector.SelectFilesForFindingSimilarProblems();
+        var resultData = BackendFileComparer.CompareFiles(inputData);
+        Printer.Display(resultData);
         return resultData;
     }
+
+    private void DealWithConfigFile()
+    {
+        var config = ConfigReader.ReadConfig();
+        config.CallIfHasValue(SelectFilesFromConfig);
+
+        if (config is ErrorWrapper<Config, string> errorWrapper)
+            Console.WriteLine(errorWrapper.Error);
+    }
+    private void SelectFilesFromConfig(Config config)
+    {
+        FilesSelector = new FilesFromConfigSelector(config);
+    }
+
 
     private static void InitLogger()
     {
@@ -28,7 +40,7 @@ public class ProgramToFindDuplicates
             .CreateLogger();
     }
 
-    private readonly IFilesSelector filesSelector;
-    private readonly IBackendFileComparer backendFileComparer;
-    private readonly IPrettyPrinter printer;
+    public IFilesSelector FilesSelector { get; private set; }
+    private IBackendFileComparer BackendFileComparer { get; }
+    private IPrettyPrinter Printer { get; }
 }
