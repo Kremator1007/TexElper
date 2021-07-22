@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CA1050: Declare types in namespaces
+dotnet_diagnostic.CA1050.severity = none
+
+# RCS1110: Declare type inside namespace.
+dotnet_diagnostic.RCS1110.severity = none
