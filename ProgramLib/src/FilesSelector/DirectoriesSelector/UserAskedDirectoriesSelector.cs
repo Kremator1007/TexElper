@@ -26,5 +26,4 @@ public class UserAskedDirectoriesSelector : IDirectoriesSelector
                                 $"the current directory will be used ({curDir}).");
         System.Console.WriteLine("After	inputting all the directories, press enter:");
     }
-
 }

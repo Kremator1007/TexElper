@@ -1,10 +1,10 @@
 ﻿using System;
 
-public class Playground
+public static class Playground
 {
     public static void Main()
     {
-        var path = @"C:\Users\James\Desktop\My documents\tmp";
+        const string path = @"C:\Users\James\Desktop\My documents\tmp";
         var filesSelector = new FilesByDirectoriesSelector(
             new ConstantDirectoriesSelector(new string[] { path })
         );

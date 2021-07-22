@@ -3,40 +3,35 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-public class TexFileReader
+public static class TexFileReader
 {
     public static List<Problem> ReadFile(string pathToTheFile)
     {
         var problems = new List<Problem>();
         string[] lines = System.IO.File.ReadAllLines(pathToTheFile);
         string[] docLines = TrimRedundantTexParts(lines);
-        for (int i = 0; i < docLines.Length;)
+        for (int i = 0; i < docLines.Length; ++i)
         {
             var currentLine = docLines[i];
             if (currentLine.TrimStart(' ', '\t').StartsWith(@"\q"))
             {
-                var (problem, lineCount) = ReadProblemStartingFromLine(
+                var problem = ReadProblemStartingFromLine(
                     docLines, i, pathToTheFile);
                 problems.Add(problem);
-                i += lineCount;
-            }
-            else
-            {
-                ++i;
             }
         }
         return problems;
     }
 
-    private static (Problem, int) ReadProblemStartingFromLine(
+    private static Problem ReadProblemStartingFromLine(
         string[] lines,
         int startingLine,
         string pathToTheFileOfTheProblem)
     {
         Serilog.Log.Verbose("Starting reading problem in file \"{File}\" on line \n\"{Line}\"",
         pathToTheFileOfTheProblem, lines[startingLine]);
+
         var problemText = new StringBuilder();
-        var lineCount = 1;
         //second line clears preceding \q
         problemText.Append(lines[startingLine].TrimStart()[2..].TrimStart());
         var problemLines = lines
@@ -45,8 +40,7 @@ public class TexFileReader
         foreach (string problemLine in problemLines)
             problemText.AppendLine(problemLine);
         string problemTextAsString = PreprocessProblemText(problemText);
-        return (new Problem(problemTextAsString, pathToTheFileOfTheProblem),
-            lineCount);
+        return new Problem(problemTextAsString, pathToTheFileOfTheProblem);
     }
 
     private static string PreprocessProblemText(StringBuilder problemText)
@@ -61,7 +55,7 @@ public class TexFileReader
     private static bool ContinuesTheProblem(string s)
     {
         s = s.Trim();
-        if (s == "")
+        if (s.Length == 0)
             return true;
         else if (s.StartsWith(@"\q") || s.StartsWith(@"\end"))
             return false;
@@ -82,36 +76,32 @@ public class TexFileReader
 
     private static bool IsDocumentStart(string str)
     {
-        var zeroOrMoreSpacesRegexString = " *";
         var isDocumentStartRegex = new Regex
         (
-            @"begin" +
-            zeroOrMoreSpacesRegexString +
-            "{" +
-            zeroOrMoreSpacesRegexString +
-            "document" +
-            zeroOrMoreSpacesRegexString +
-            "}"
+            GetRegexString_IsDocumentSth("begin")
         );
-        if (isDocumentStartRegex.Match(str).Success)
-            return true;
-        else
-            return false;
+        return isDocumentStartRegex.Match(str).Success;
     }
 
     private static bool IsDocumentEnd(string str)
     {
-        var zeroOrMoreSpacesRegexString = " *";
         var isDocumentEnd = new Regex
         (
-            @"end" +
+            GetRegexString_IsDocumentSth("end")
+        );
+        return isDocumentEnd.Match(str).Success;
+    }
+
+    private static string GetRegexString_IsDocumentSth(string sth)
+    {
+        const string zeroOrMoreSpacesRegexString = " *";
+        return
+            sth +
             zeroOrMoreSpacesRegexString +
             "{" +
             zeroOrMoreSpacesRegexString +
             "document" +
             zeroOrMoreSpacesRegexString +
-            "}"
-        );
-        return isDocumentEnd.Match(str).Success;
+            "}";
     }
 }

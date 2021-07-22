@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class ProblemInFileShower
+public static class ProblemInFileShower
 {
-    public void Run()
+    public static void Run()
     {
         PrintEntryMessage();
         string? pathToFile = SelectFile();
@@ -35,7 +35,10 @@ class ProblemInFileShower
             Console.WriteLine("Weird, we got an invalid path... Try again?");
             return null;
         }
-        else return inputFilePath;
+        else
+        {
+            return inputFilePath;
+        }
     }
 
     private static void PrintProblems(List<Problem> fileWithProblems)

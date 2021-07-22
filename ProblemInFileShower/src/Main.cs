@@ -1,8 +1,7 @@
-class MainClass
+internal static class MainClass
 {
     public static void Main()
     {
-        var program = new ProblemInFileShower();
-        program.Run();
+        ProblemInFileShower.Run();
     }
 }
