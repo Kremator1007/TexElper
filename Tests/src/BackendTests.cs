@@ -30,7 +30,7 @@ namespace tests
             Assert.Equal(expectedNumOfSimilarities, result.SimilarProblemsCases.Count);
         }
 
-        private FilesToCompare ReadABFilesFromDir(string pathRelativeToMedia)
+        private static FilesToCompare ReadABFilesFromDir(string pathRelativeToMedia)
         {
             string testDir = "../../../media/" + pathRelativeToMedia;
             if (testDir[^1] != '/')

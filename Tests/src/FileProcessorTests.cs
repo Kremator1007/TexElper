@@ -5,18 +5,25 @@ namespace tests
 {
     public class FileProcessorTests
     {
-        [Fact]
-        public void Test1()
+        [Theory]
+        [InlineData("test1/a.tex", 2)]
+        [InlineData("test1/b.tex", 2)]
+        public void ReadFile_NormalProblemLists_ReturnsProperAmountOfProblems(
+            string fileRelativePath,
+            int expectedNumOfProblems
+            )
         {
-            string testDir = "../../../media/test1/";
-            var fstProbs = TexFileReader.ReadFile(testDir + "a.tex");
-            var sndProbs = TexFileReader.ReadFile(testDir + "b.tex");
-            Assert.Equal(2, fstProbs.Count);
-            Assert.Equal(2, sndProbs.Count);
-            Assert.True(new ByLengthProblemComparer().AreTwoProblemsSimilar(fstProbs[0],
-                fstProbs[1]));
-            Assert.False(new ByLengthProblemComparer().AreTwoProblemsSimilar(fstProbs[0],
-                sndProbs[0]));
+            const string testDir = "../../../media/";
+            var problems = TexFileReader.ReadFile(testDir + fileRelativePath);
+            Assert.Equal(expectedNumOfProblems, problems.Count);
+        }
+
+        [Fact]
+        public void ReadFile_ProblemsHaveLineBreaks_ReturnsProperAmountOfProblems()
+        {
+            const string testDir = "../../../media/test1/";
+            var probs = TexFileReader.ReadFile(testDir + "c.tex");
+            Assert.Equal(3, probs.Count);
         }
     }
 }
