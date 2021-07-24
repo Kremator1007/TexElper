@@ -3,12 +3,12 @@ public abstract class MaybeWithError<ValueT, ErrorT>
     public MaybeWithError<ValueT2, ErrorT> Bind<ValueT2>(
         System.Func<ValueT,
         MaybeWithError<ValueT2, ErrorT>> func) => this switch
-    {
-        ValueWrapper<ValueT, ErrorT> valueWrapper => func(valueWrapper.Value),
-        ErrorWrapper<ValueT, ErrorT> errorWrapper =>
-            new ErrorWrapper<ValueT2, ErrorT>(errorWrapper.Error),
-        _ => throw new System.Exception("Unreachable")
-    };
+        {
+            ValueWrapper<ValueT, ErrorT> valueWrapper => func(valueWrapper.Value),
+            ErrorWrapper<ValueT, ErrorT> errorWrapper =>
+                new ErrorWrapper<ValueT2, ErrorT>(errorWrapper.Error),
+            _ => throw new System.Exception("Unreachable")
+        };
 
     public abstract void CallIfHasValue(System.Action<ValueT> action);
 }
