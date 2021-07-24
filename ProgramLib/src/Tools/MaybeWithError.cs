@@ -11,6 +11,7 @@ public abstract class MaybeWithError<ValueT, ErrorT>
         };
 
     public abstract void CallIfHasValue(System.Action<ValueT> action);
+    public abstract ValueT? Extract();
 }
 
 public class ValueWrapper<ValueT, ErrorT> : MaybeWithError<ValueT, ErrorT>
@@ -20,6 +21,8 @@ public class ValueWrapper<ValueT, ErrorT> : MaybeWithError<ValueT, ErrorT>
 
     public override void CallIfHasValue(System.Action<ValueT> action) =>
         action(Value);
+
+    public override ValueT? Extract() => Value;
 }
 
 public class ErrorWrapper<ValueT, ErrorT> : MaybeWithError<ValueT, ErrorT>
@@ -28,4 +31,6 @@ public class ErrorWrapper<ValueT, ErrorT> : MaybeWithError<ValueT, ErrorT>
     public ErrorT Error { get; }
 
     public override void CallIfHasValue(System.Action<ValueT> action) { }
+
+    public override ValueT? Extract() => default;
 }

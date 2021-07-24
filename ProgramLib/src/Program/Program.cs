@@ -1,5 +1,4 @@
-﻿using Serilog;
-using System;
+﻿using System;
 public class ProgramToFindDuplicates
 {
     public ProgramToFindDuplicates()
@@ -10,34 +9,26 @@ public class ProgramToFindDuplicates
     }
     public ResultData RunProgram()
     {
-        DealWithConfigFile();
-        InitLogger();
+        Config? config = DealWithConfigFile();
+        LogHandler.InitGlobalLog(config);
         var inputData = FilesSelector.SelectFilesForFindingSimilarProblems();
         var resultData = BackendFileComparer.CompareFiles(inputData);
         Printer.Display(resultData);
         return resultData;
     }
 
-    private void DealWithConfigFile()
+    private Config? DealWithConfigFile()
     {
         var config = ConfigReader.ReadConfig();
         config.CallIfHasValue(SelectFilesFromConfig);
 
         if (config is ErrorWrapper<Config, string> errorWrapper)
             Console.WriteLine(errorWrapper.Error);
+        return config.Extract();
     }
     private void SelectFilesFromConfig(Config config)
     {
         FilesSelector = new FilesFromConfigSelector(config);
-    }
-
-
-    private static void InitLogger()
-    {
-        Serilog.Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Verbose()
-            .WriteTo.File("log.txt")
-            .CreateLogger();
     }
 
     public IFilesSelector FilesSelector { get; private set; }

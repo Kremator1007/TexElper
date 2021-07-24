@@ -5,7 +5,7 @@ public static class ConfigReader
 {
     public static MaybeWithError<Config, string> ReadConfig()
     {
-        const string path = "texelperconfig";
+        const string path = "texelperconfig.json";
         return ReadJsonFromFile(path)
             .Bind(ProcessJsonIntoConfig)
             .Bind(CheckFieldsNotNull);

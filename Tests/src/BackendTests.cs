@@ -31,14 +31,11 @@ namespace tests
 
         private static FilesToCompare ReadABFilesFromDir(string pathRelativeToMedia)
         {
-            string testDir = "../../../media/" + pathRelativeToMedia;
-            if (testDir[^1] != '/')
-                testDir += "/";
-
+            string testDir = System.IO.Path.Combine("../../../media/", pathRelativeToMedia);
             List<string> files = new()
             {
-                testDir + "a.tex",
-                testDir + "b.tex"
+                System.IO.Path.Combine(testDir, "a.tex"),
+                System.IO.Path.Combine(testDir, "b.tex")
             };
             return new FilesToCompare(files);
         }
