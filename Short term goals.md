@@ -1,6 +1,9 @@
 - Logging:
-- - Save last 10 logs
-- - Save logs in a folder (%%appdata%%)
-- - Create a class to controll the logging
+- - Save last 10 logs - done
+- - Save logs in a folder (%%appdata%%) - done
+- - Create a class to controll the logging - done
+- - Cover everything with logs
 - Config
 - - Embed the configfile reading into the system - Done (Yay)
+- Update Readme with information about reading from json
+- Problem reading - add symbols to bound the problem text
