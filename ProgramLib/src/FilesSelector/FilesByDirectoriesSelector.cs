@@ -1,5 +1,5 @@
-using System.Linq;
 using System.IO;
+using System.Linq;
 using UsefulExtensions;
 
 public class FilesByDirectoriesSelector : IFilesSelector

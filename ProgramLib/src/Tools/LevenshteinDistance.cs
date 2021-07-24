@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 public partial class Tools
 {
     //copied from https://www.csharpstar.com/csharp-string-distance-algorithm/

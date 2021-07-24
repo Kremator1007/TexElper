@@ -1,5 +1,5 @@
-﻿using System;
-using Serilog;
+﻿using Serilog;
+using System;
 public class ProgramToFindDuplicates
 {
     public ProgramToFindDuplicates()

@@ -1,6 +1,4 @@
-﻿using System;
-
-public static class Playground
+﻿public static class Playground
 {
     public static void Main()
     {

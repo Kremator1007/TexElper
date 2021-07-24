@@ -1,6 +1,4 @@
-﻿using System;
-
-internal static class MainClass
+﻿internal static class MainClass
 {
     public static void Main()
     {
