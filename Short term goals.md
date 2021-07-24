@@ -3,4 +3,4 @@
 - - Save logs in a folder (%%appdata%%)
 - - Create a class to controll the logging
 - Config
-- - Embed the configfile reading into the system
+- - Embed the configfile reading into the system - Done (Yay)
