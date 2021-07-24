@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 public static class ConfigReader
 {
-    public static MaybeWithError<Config, string> ReadConfig()
+    public static MaybeWithError<Config, string> ReadConfig(string? pathToConfigFile = null)
     {
-        const string path = "texelperconfig.json";
+        string path = pathToConfigFile ?? "texelperconfig.json";
         return ReadJsonFromFile(path)
             .Bind(ProcessJsonIntoConfig)
             .Bind(CheckFieldsNotNull);
@@ -29,6 +29,7 @@ public static class ConfigReader
         {
             var options = new JsonSerializerOptions
             {
+                PropertyNameCaseInsensitive = true,
                 Converters =
                 {
                     new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)

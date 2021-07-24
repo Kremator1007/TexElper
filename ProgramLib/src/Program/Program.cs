@@ -20,13 +20,13 @@ public class ProgramToFindDuplicates
     private Config? DealWithConfigFile()
     {
         var config = ConfigReader.ReadConfig();
-        config.CallIfHasValue(SelectFilesFromConfig);
+        config.CallIfHasValue(UseConfigAsFileSelector);
 
         if (config is ErrorWrapper<Config, string> errorWrapper)
             Console.WriteLine(errorWrapper.Error);
         return config.Extract();
     }
-    private void SelectFilesFromConfig(Config config)
+    private void UseConfigAsFileSelector(Config config)
     {
         FilesSelector = new FilesFromConfigSelector(config);
     }

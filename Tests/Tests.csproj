@@ -23,4 +23,8 @@
     <ProjectReference Include="..\ProgramLib\ProgramLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="media\test7\" />
+  </ItemGroup>
+
 </Project>
