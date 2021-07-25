@@ -7,7 +7,7 @@
             new ConstantDirectoriesSelector(new string[] { path })
         );
         var backendFileComparer = new BasicFileComparer(new ByLevenshteinProblemComparer());
-        var printer = new DefaultPrinter();
+        var printer = new DefaultPrinter(System.Console.Out);
 
         var inputData = filesSelector.SelectFilesForFindingSimilarProblems();
         var resultData = backendFileComparer.CompareFiles(inputData);
