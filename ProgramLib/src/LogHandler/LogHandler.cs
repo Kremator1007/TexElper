@@ -7,13 +7,13 @@ internal static class LogHandler
     static LogHandler()
     {
         string localappdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        supposedLogsFolder =  System.IO.Path.Combine(localappdata, "TexElper/logs");
+        supposedLogsFolder = System.IO.Path.Combine(localappdata, "TexElper/logs");
     }
 
     public static void InitGlobalLog()
     {
         Serilog.Log.Logger = new LoggerConfiguration()
-            .SetMinimumLevel(LogVerbosity.Information)
+            .SetMinimumLevel(LogVerbosity.Verbose)
             .SetupLogFile()
             .CreateLogger();
     }
