@@ -10,7 +10,7 @@
         var printer = new DefaultPrinter(System.Console.Out);
 
         var inputData = filesSelector.SelectFilesForFindingSimilarProblems();
-        var resultData = backendFileComparer.CompareFiles(inputData);
+        var resultData = backendFileComparer.CompareFiles(inputData.Extract()!);
         printer.Display(resultData);
     }
 }

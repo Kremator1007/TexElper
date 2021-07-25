@@ -1,6 +1,6 @@
 ﻿public interface IJsonStringExtractor
 {
-    public string Extract();
+    public Expected<string, string> Extract();
 }
 
 public class JsonStringFromConstantStringExtractor : IJsonStringExtractor
@@ -8,7 +8,8 @@ public class JsonStringFromConstantStringExtractor : IJsonStringExtractor
     public JsonStringFromConstantStringExtractor(string inputString) => InputString = inputString;
     public string InputString { get; }
 
-    public string Extract() => InputString;
+    public Expected<string, string> Extract() =>
+        new ValueWrapper<string, string>(InputString);
 }
 
 public class JsonStringFromFileExtractor : IJsonStringExtractor
@@ -18,8 +19,8 @@ public class JsonStringFromFileExtractor : IJsonStringExtractor
 
     public string FilePath { get; }
 
-    public string Extract()
+    public Expected<string, string> Extract()
     {
-        return System.IO.File.ReadAllText(FilePath);
+        return new ValueWrapper<string, string>(System.IO.File.ReadAllText(FilePath));
     }
 }

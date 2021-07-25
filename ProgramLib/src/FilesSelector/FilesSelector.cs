@@ -1,4 +1,4 @@
 public interface IFilesSelector
 {
-    public FilesToCompare SelectFilesForFindingSimilarProblems();
+    public Expected<FilesToCompare, string> SelectFilesForFindingSimilarProblems();
 }

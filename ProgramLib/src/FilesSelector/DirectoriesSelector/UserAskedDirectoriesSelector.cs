@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 public class UserAskedDirectoriesSelector : IDirectoriesSelector
 {
-    public IEnumerable<string> SelectDirs()
+    public string[] SelectDirs()
     {
         string curDir = System.IO.Directory.GetCurrentDirectory();
         PrintEnterMessage(curDir);

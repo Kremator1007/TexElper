@@ -8,41 +8,55 @@ public class FromJsonSelector : IFilesSelector
     public FromJsonSelector(IJsonStringExtractor stringExtractor) =>
         JsonStringExtractor = stringExtractor;
 
-    public FilesToCompare SelectFilesForFindingSimilarProblems()
+    public Expected<FilesToCompare, string> SelectFilesForFindingSimilarProblems()
     {
-        string extractedJsonString = JsonStringExtractor.Extract();
-        JsonTemplateData jsonData = ParseJsonData(extractedJsonString);
-        return ExtractFilesList(jsonData);
+        return JsonStringExtractor
+            .Extract()
+            .Bind(ParseJsonData)
+            .Bind(ExtractFilesList);
     }
 
     public IJsonStringExtractor JsonStringExtractor { get; init; }
 
-    private static JsonTemplateData ParseJsonData(string extractedJsonString)
+    private static readonly JsonSerializerOptions Options = new()
     {
-        var options = new JsonSerializerOptions
+        PropertyNameCaseInsensitive = true,
+        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
+    };
+
+    private static Expected<JsonTemplateData, string> ParseJsonData(string extractedJsonString)
+    {
+        try
         {
-            PropertyNameCaseInsensitive = true,
-            Converters =
-                {
-                    new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                }
-        };
-        JsonTemplateData? jsonData = JsonSerializer.Deserialize<JsonTemplateData>(
-            extractedJsonString, options);
-        return jsonData!;
+            JsonTemplateData? jsonData = JsonSerializer.Deserialize<JsonTemplateData>(
+                extractedJsonString, Options);
+            if (jsonData is not null)
+            {
+                return new ValueWrapper<JsonTemplateData, string>(jsonData!);
+            }
+            else
+            {
+                return new ErrorWrapper<JsonTemplateData, string>(
+                   "Json Deserializer interpreted data as null");
+            }
+        }
+        catch (System.Exception e)
+        {
+            return new ErrorWrapper<JsonTemplateData, string>("Error while parsing json: " + e.Message);
+        }
     }
 
-    private static FilesToCompare ExtractFilesList(JsonTemplateData jsonData)
+    private static Expected<FilesToCompare, string> ExtractFilesList(JsonTemplateData jsonData)
     {
         List<string> filesList = new();
 
-        ExtractFilesFromConfigDirectories(filesList, jsonData);
-        ExtractFilesFromConfigFilesList(filesList, jsonData);
+        ExtractFilesFromInputDirectories(filesList, jsonData);
+        ExtractFilesFromInputFilesList(filesList, jsonData);
 
-        return new FilesToCompare(filesList);
+        return new ValueWrapper<FilesToCompare, string>(new FilesToCompare(filesList));
     }
 
-    private static void ExtractFilesFromConfigFilesList(List<string> filesList, JsonTemplateData jsonData)
+    private static void ExtractFilesFromInputFilesList(List<string> filesList, JsonTemplateData jsonData)
     {
         Serilog.Log.Logger.Verbose("Extracting files from config's files list");
         string[] extractedFiles = jsonData.SelectedFiles.Where(
@@ -53,12 +67,13 @@ public class FromJsonSelector : IFilesSelector
         filesList.AddRange(extractedFiles);
     }
 
-    private static void ExtractFilesFromConfigDirectories(List<string> filesList, JsonTemplateData jsonData)
+    private static void ExtractFilesFromInputDirectories(List<string> filesList, JsonTemplateData jsonData)
     {
         IDirectoriesSelector dirSelector = new ConstantDirectoriesSelector(
             jsonData.SelectedDirectories);
         var filesFromDirectories = new FilesByDirectoriesSelector(dirSelector)
             .SelectFilesForFindingSimilarProblems();
-        filesList.AddRange(filesFromDirectories.AllRelevantFiles);
+        System.Diagnostics.Debug.Assert(filesFromDirectories.Extract() != null);
+        filesList.AddRange(filesFromDirectories.Extract()!.AllRelevantFiles);
     }
 }

@@ -8,12 +8,20 @@
         Printer = new DefaultPrinter(new System.IO.StreamWriter("out.txt"));
     }
 
-    public ResultData RunProgram()
+    public ResultData? RunProgram()
     {
-        var inputData = FilesSelector.SelectFilesForFindingSimilarProblems();
-        var resultData = BackendFileComparer.CompareFiles(inputData);
-        Printer.Display(resultData);
-        return resultData;
+        var maybeInputData = FilesSelector.SelectFilesForFindingSimilarProblems();
+        if (maybeInputData is ErrorWrapper<FilesToCompare, string> errorWrapper)
+        {
+            Printer.DisplayErrorMessage(errorWrapper.Error);
+            return null;
+        }
+        else
+        {
+            var resultData = BackendFileComparer.CompareFiles(maybeInputData.Extract()!);
+            Printer.Display(resultData);
+            return resultData;
+        }
     }
 
     public IFilesSelector FilesSelector { get; }

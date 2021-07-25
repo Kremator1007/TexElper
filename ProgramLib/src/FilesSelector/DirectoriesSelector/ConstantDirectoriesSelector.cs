@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 
 public class ConstantDirectoriesSelector : IDirectoriesSelector
@@ -8,7 +7,7 @@ public class ConstantDirectoriesSelector : IDirectoriesSelector
             .Where(System.IO.Directory.Exists)
             .ToArray();
 
-    public IEnumerable<string> SelectDirs()
+    public string[] SelectDirs()
     {
         return directories;
     }

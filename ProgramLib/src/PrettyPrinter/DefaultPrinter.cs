@@ -31,4 +31,11 @@ public class DefaultPrinter : IPrettyPrinter
         OutputStream.Write("1: " + similarProblemCase.Fst.Text + "\n");
         OutputStream.Write("2: " + similarProblemCase.Snd.Text + "\n");
     }
+
+    public void DisplayErrorMessage(string message)
+    {
+        OutputStream.Write("Error has occured:\n");
+        OutputStream.Write(message);
+        OutputStream.Flush();
+    }
 }

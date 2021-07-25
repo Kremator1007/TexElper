@@ -12,7 +12,7 @@ namespace tests
                 new ConstantDirectoriesSelector(new string[] { path })
             );
             var files = filesSelector.SelectFilesForFindingSimilarProblems();
-            Assert.Equal(5, files.AllRelevantFiles.Count);
+            Assert.Equal(5, files.Extract()!.AllRelevantFiles.Count);
         }
         [Fact]
         public void SelectFilesByDirectory_NotOnlyTexFile_ProperlyCounts()
@@ -22,7 +22,7 @@ namespace tests
                 new ConstantDirectoriesSelector(new string[] { path })
             );
             var files = filesSelector.SelectFilesForFindingSimilarProblems();
-            Assert.Equal(5, files.AllRelevantFiles.Count);
+            Assert.Equal(5, files.Extract()!.AllRelevantFiles.Count);
         }
     }
 }
