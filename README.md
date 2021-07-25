@@ -33,3 +33,12 @@ In files C:\Users\James\Desktop\My documents\Sample problems\Summer_2.tex and C:
 2: 3. Дан параллелепипед с вершинами в узлах целочисленной кубической решетки, внутри которого нет других узлов этой решетки (в том числе на сторонах и гранях). Докажите, что его объем равен объему единичного кубика решетки.
 
 ```
+
+
+# User guide
+
+- From the "Releases" section download the corresponding binary file
+- Create "texelperinput.json" file in the same directory as the binary file
+- Fill JSON file with content as in the example above
+- Run the binary
+- Watch the content of "a.txt" created automatically in the same directory
