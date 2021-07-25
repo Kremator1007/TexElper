@@ -8,7 +8,7 @@ This repository aims to assist with finding possible duplicates in problems list
 
 Please note that starting from the forth release the console input is no used anymore - the program reads input files from "texelperinput.json", located in the same folder as executable, and outputs results to "out.txt". The logs are written into "%appdata%/TexElper/logs", they can help to find the reason of a crash (if there was one).
 
-Sample "texelperinput.json":
+Sample "texelperinput.json" (This file will compare the .tex files within the folder):
 ```
 {
 	"SelectedFiles": [],
@@ -39,6 +39,6 @@ In files C:\Users\James\Desktop\My documents\Sample problems\Summer_2.tex and C:
 
 - From the "Releases" section download the corresponding binary file
 - Create "texelperinput.json" file in the same directory as the binary file
-- Fill JSON file with content as in the example above
+- Fill JSON file with content as in the example above. All the selected files (and files in selected folders) will be compared pairwise
 - Run the binary
 - Watch the content of "out.txt" created automatically in the same directory
