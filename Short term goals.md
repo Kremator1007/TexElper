@@ -5,6 +5,6 @@
 - - Cover everything with logs
 - Config
 - - Embed the configfile reading into the system - Done (Yay)
-- Update Readme with information about reading from json
+- Update Readme with information about reading from json - Done
 - Problem reading - add symbols to bound the problem text
-- Deprecate Console input - use file input instead
+- Deprecate Console input - use file input instead - Done

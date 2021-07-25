@@ -21,6 +21,13 @@ public class JsonStringFromFileExtractor : IJsonStringExtractor
 
     public Expected<string, string> Extract()
     {
-        return new ValueWrapper<string, string>(System.IO.File.ReadAllText(FilePath));
+        try
+        {
+            return new ValueWrapper<string, string>(System.IO.File.ReadAllText(FilePath));
+        }
+        catch (System.Exception)
+        {
+            return new ErrorWrapper<string, string>("Error while opening file (it probably doesn't exist)");
+        }
     }
 }
