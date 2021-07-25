@@ -27,7 +27,7 @@ public class JsonStringFromFileExtractor : IJsonStringExtractor
         }
         catch (System.Exception)
         {
-            return new ErrorWrapper<string, string>("Error while opening file (it probably doesn't exist)");
+            return new ErrorWrapper<string, string>("Error while opening file texlper.json (it probably doesn't exist)");
         }
     }
 }
