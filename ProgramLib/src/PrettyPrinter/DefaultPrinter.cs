@@ -1,5 +1,8 @@
 public class DefaultPrinter : IPrettyPrinter
 {
+    public DefaultPrinter(System.IO.TextWriter textWriter) =>
+        OutputStream = textWriter;
+
     public void Display(ResultData resultData)
     {
         PrintEnterMessage(resultData);
@@ -7,30 +10,25 @@ public class DefaultPrinter : IPrettyPrinter
         {
             PrintSimilarProblemCaseInfo(similarProblemCase);
         }
-        PrintOuttroMessage();
+        OutputStream.Flush();
     }
-
-    private static void PrintEnterMessage(ResultData resultData)
+    private System.IO.TextWriter OutputStream { get; }
+    private void PrintEnterMessage(ResultData resultData)
     {
         int similarProblemCasesCount = resultData.SimilarProblemsCases.Count;
         string message = similarProblemCasesCount > 0
             ? $"There are {resultData.SimilarProblemsCases.Count} cases of " +
                               "suspected problems repetition:"
             : "There are no cases of possible problems repetitions";
-        System.Console.WriteLine(message);
+        OutputStream.WriteLine(message);
     }
 
-    private static void PrintSimilarProblemCaseInfo(SimilarProblemsCase similarProblemCase)
+    private void PrintSimilarProblemCaseInfo(SimilarProblemsCase similarProblemCase)
     {
-        System.Console.Write("\n\n");
-        System.Console.Write($"In files {similarProblemCase.Fst.PathToTheFileOfTheProblem} and " +
+        OutputStream.Write("\n\n");
+        OutputStream.Write($"In files {similarProblemCase.Fst.PathToTheFileOfTheProblem} and " +
                              $"{similarProblemCase.Snd.PathToTheFileOfTheProblem} with the text:\n");
-        System.Console.Write("1: " + similarProblemCase.Fst.Text + "\n");
-        System.Console.Write("2: " + similarProblemCase.Snd.Text + "\n");
-    }
-    private static void PrintOuttroMessage()
-    {
-        System.Console.WriteLine("Press any key to quit");
-        System.Console.ReadKey();
+        OutputStream.Write("1: " + similarProblemCase.Fst.Text + "\n");
+        OutputStream.Write("2: " + similarProblemCase.Snd.Text + "\n");
     }
 }

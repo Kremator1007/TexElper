@@ -4,18 +4,23 @@ using System.Linq;
 
 internal static class LogHandler
 {
-    public static void InitGlobalLog(Config? config) => Serilog.Log.Logger = new LoggerConfiguration()
-            .SetMinimumLevel(config?.LogVerbosity)
-            .SetupLogFile()
-            .CreateLogger();
-
-    private static readonly string supposedLogsFolder = new Func<string>(() =>
+    static LogHandler()
     {
         string localappdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        string logsFolder = System.IO.Path.Combine(localappdata, "TexElper/logs");
-        return logsFolder;
-    })();
-    private static readonly int maximumLogFilesAmount = 10;
+        supposedLogsFolder =  System.IO.Path.Combine(localappdata, "TexElper/logs");
+    }
+
+    public static void InitGlobalLog()
+    {
+        Serilog.Log.Logger = new LoggerConfiguration()
+            .SetMinimumLevel(LogVerbosity.Information)
+            .SetupLogFile()
+            .CreateLogger();
+    }
+
+    private static readonly string supposedLogsFolder;
+
+    private const int maximumLogFilesAmount = 10;
 
     private static LoggerConfiguration SetMinimumLevel(this LoggerConfiguration loggerConfiguration, LogVerbosity? logVerbosity) =>
         logVerbosity switch
@@ -38,17 +43,14 @@ internal static class LogHandler
         return loggerConfiguration.WriteTo.File(currentLogFile);
     }
 
-
     private static void CreateLogFolderIfDoesntExist()
     {
         System.IO.Directory.CreateDirectory(supposedLogsFolder);
     }
 
-
     private static string CreateCurrentLogFile()
     {
         string logFileNameWithoutExtension = System.DateTime.Now
-            .ToUniversalTime()
             .ToString("dd MMMM yyyy, HH_mm_ss");
         while (System.IO.File.Exists(System.IO.Path.Combine(supposedLogsFolder, logFileNameWithoutExtension)))
         {
