@@ -1,4 +1,6 @@
-﻿public class ProgramToFindDuplicates
+﻿using System;
+
+public class ProgramToFindDuplicates
 {
     public ProgramToFindDuplicates()
     {
@@ -18,10 +20,20 @@
         }
         else
         {
+            LogSelectedFiles(maybeInputData.Extract()!);
             var resultData = BackendFileComparer.CompareFiles(maybeInputData.Extract()!);
             Printer.Display(resultData);
             return resultData;
         }
+    }
+
+    private void LogSelectedFiles(FilesToCompare filesToCompare)
+    {
+        var strWriter = new System.IO.StringWriter();
+        strWriter.Write("The following files were selected and pairwise compared:\n");
+        foreach (string filePath in filesToCompare.AllRelevantFiles)
+            strWriter.Write("\t{0}\n", filePath);
+        Serilog.Log.Logger.Debug(strWriter.ToString());
     }
 
     public IFilesSelector FilesSelector { get; }

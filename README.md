@@ -4,9 +4,10 @@
 
 Hello there.
 
-This repository aims to assist with finding possible duplicates in problems lists. The program reads a user-selected folder and compares .tex files in the folder, printing all possible duplicates to a console. (Please note that is assumes that all files to compare are located in one folder)
+This repository aims to assist with finding possible duplicates in problems lists. The program reads a user-selected folder and compares .tex files in the folder, printing all possible duplicates to a console. (Please note that is assumes that all files to compare are located in one folder).
 
-Please note that starting from the forth release the console input is no used anymore - the program reads input files from "texelperinput.json", located in the same folder as executable, and outputs results to "out.txt". The logs are written into "%appdata%/TexElper/logs", they can help to find the reason of a crash (if there was one).
+Please note that starting from the forth release the console input is no used anymore - the program reads input files from "texelperinput.json", located in the same folder as executable, and outputs results to "out.txt". 
+The logs are written into "%appdata%/TexElper/logs", they can help to find the reason of a crash (if there was one), or they can help to make sure the program read your files and problems within them properly. Only the last ten logs are stored.
 
 Sample "texelperinput.json" (This file will compare the .tex files within the folder "Sample problems"):
 ```

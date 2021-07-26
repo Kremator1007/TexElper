@@ -13,8 +13,6 @@ public class FilesByDirectoriesSelector : IFilesSelector
             new FilesToCompare(
                 dirSelector
                     .SelectDirs()
-                    .ForEach(dirPath =>
-                        Serilog.Log.Information($"Directory {dirPath} selected successfully"))
                     .SelectMany((string pathToDir) => Directory.EnumerateFiles(pathToDir, "*.tex"))
                     .ToList()));
     }

@@ -58,12 +58,10 @@ public class FromJsonSelector : IFilesSelector
 
     private static void ExtractFilesFromInputFilesList(List<string> filesList, JsonTemplateData jsonData)
     {
-        Serilog.Log.Logger.Verbose("Extracting files from config's files list");
         string[] extractedFiles = jsonData.SelectedFiles.Where(
                     System.IO.File.Exists
                     ).ToArray();
         string logFileList = string.Join('\n', extractedFiles);
-        Serilog.Log.Logger.Verbose("The following files were successfuly extracted:\n" + logFileList);
         filesList.AddRange(extractedFiles);
     }
 
