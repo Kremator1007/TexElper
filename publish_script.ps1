@@ -10,7 +10,7 @@ function buildRuntime {
 	param(
 		$runtime
 	)
-	$publishCommand = "dotnet publish ProgramExec/ -r $runtime --self-contained false -p:PublishSingleFile=true -p:DebugType=embedded -p:PublishTrimmed=false -p:PublishReadyToRun=false"
+	$publishCommand = "dotnet publish ProgramExec/ -c Release -r $runtime --self-contained false -p:PublishSingleFile=true -p:DebugType=embedded -p:PublishTrimmed=false -p:PublishReadyToRun=false"
 	Invoke-Expression -Command $publishCommand
 }
 		
