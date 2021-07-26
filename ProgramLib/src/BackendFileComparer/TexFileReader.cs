@@ -20,7 +20,19 @@ public static class TexFileReader
                 problems.Add(problem);
             }
         }
+        LogResultOfProblemReading(problems, pathToTheFile);
         return problems;
+    }
+
+    private static void LogResultOfProblemReading(List<Problem> problems, string pathToTheFile)
+    {
+        var strWriter = new System.IO.StringWriter();
+        strWriter.Write("Problems read from \"{0}\":\n", pathToTheFile);
+        foreach (var problem in problems)
+        {
+            strWriter.Write("\n---begin\n{0}\n---end\n", problem.Text);
+        }
+        Serilog.Log.Logger.Debug(strWriter.ToString());
     }
 
     private static Problem ReadProblemStartingFromLine(
@@ -28,9 +40,6 @@ public static class TexFileReader
         int startingLine,
         string pathToTheFileOfTheProblem)
     {
-        Serilog.Log.Verbose("Starting reading problem in file \"{File}\" on line \n\"{Line}\"",
-        pathToTheFileOfTheProblem, lines[startingLine]);
-
         var problemText = new StringBuilder();
         //second line clears preceding \q
         problemText.Append(lines[startingLine].TrimStart()[2..].TrimStart());
