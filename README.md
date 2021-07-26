@@ -38,6 +38,7 @@ In files C:\Users\James\Desktop\My documents\Sample problems\Summer_2.tex and C:
 
 # User guide
 
+- Download [dotnet runtime](https://dotnet.microsoft.com/download/dotnet/5.0/runtime)
 - From the "Releases" section download the corresponding binary file
 - Create "texelperinput.json" file in the same directory as the binary file (the sample file can be found in the repository in the top directory, but creating it should not be difficult)
 - Fill JSON file with content as in the example above. All the selected files (and files in selected folders) will be compared pairwise. Please note that directory separator should be '\\' ot '/'. Using '/' as directory separator will cause the error "Invalid escapable character"
